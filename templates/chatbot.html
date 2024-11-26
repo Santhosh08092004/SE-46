@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant - Event Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='chatbot.css') }}">
+</head>
+<body>
+    <div class="chatbot-container">
+        <div class="chat-header">
+            <h2>Event Assistant</h2>
+            <a href="{{ url_for('restart_chat') }}" class="reset-button" title="Reset Chat">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                    <path d="M3 3v5h5"></path>
+                </svg>
+            </a>
+        </div>
+
+        <div id="chatBox" class="chat-messages">
+            {% if not chat_history %}
+                <div class="bot-message">Welcome! Would you like to participate in an event or arrange one?</div>
+            {% else %}
+                {% for sender, message in chat_history %}
+                    <div class="{{ sender }}-message">{{ message | safe }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div id="chatButtons" class="chat-buttons">
+            {% if buttons %}
+                <form method="post" action="{{ url_for('chatbot_response') }}">
+                    {% for button in buttons %}
+                        {% if button == 'View Tickets in Profile' %}
+                            <button type="submit" name="message" value="{{ button }}" class="profile-button">
+                                {{ button }}
+                            </button>
+                        {% else %}
+                            <button type="submit" name="message" value="{{ button }}">{{ button }}</button>
+                        {% endif %}
+                    {% endfor %}
+                </form>
+            {% endif %}
+        </div>
+
+        <div class="chat-input">
+            <form method="post" action="{{ url_for('chatbot_response') }}">
+                <input type="text" name="message" placeholder="Enter your message..." autocomplete="off" required>
+                <button type="submit" class="send-button">Send</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

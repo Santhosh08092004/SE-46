@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Event Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <a href="{{ url_for('profile') }}" class="profile-icon">
+        <img src="https://img.icons8.com/ios-glyphs/30/000000/user.png" alt="Profile">
+    </a>
+    
+    <a href="{{ url_for('chatbot') }}" class="chatbot-icon">
+        <img src="https://img.icons8.com/ios-glyphs/30/000000/chat.png" alt="Chatbot">
+    </a>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                    <div class="message">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="events-container">
+        <h2>THE TICKET BOOKING WEBSITE BOOK YOUR TICKET WITH THE HELP OF AI</h2>
+        <div class="events-grid animated fadeInUp">
+            {% for event in events %}
+            <div class="event-card">
+                <h3>{{ event[1] }}</h3>
+                <div class="event-info">
+                    <p><strong>Type:</strong> {{ event[2] }}</p>
+                    <p><strong>Date:</strong> {{ event[3] }}</p>
+                    <p><strong>Location:</strong> {{ event[4] }}</p>
+                    <p><strong>Capacity:</strong> {{ event[5] }}</p>
+                    <p><strong>Price:</strong> ₹{{ event[6] }}</p>
+                </div>
+                <a href="{{ url_for('chatbot') }}" class="chat-icon-link">
+                    <img src="https://img.icons8.com/ios-glyphs/30/000000/artificial-intelligence.png" class="ai-icon">
+                    Chat with AI
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
