@@ -1,0 +1,366 @@
+/* Cyberpunk Theme Variables */
+:root {
+    --neon-blue: #0ff;
+    --neon-pink: #ff2d55;
+    --neon-purple: #b537f2;
+    --dark-bg: #0a0a0f;
+    --darker-bg: #050507;
+    --cyber-blue: #00ff9f;
+    --grid-color: rgba(0, 255, 255, 0.1);
+}
+
+/* Reset and Base Styles */
+body {
+    margin: 0;
+    font-family: 'Orbitron', 'Rajdhani', sans-serif;
+    background-color: var(--dark-bg);
+    background-image: 
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px),
+        linear-gradient(var(--grid-color) 1px, transparent 1px);
+    background-size: 30px 30px;
+    color: #fff;
+}
+
+/* Chatbot Container */
+.chatbot-container {
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    max-width: 500px;
+    margin: 50px auto;
+    border-radius: 15px;
+    background: var(--darker-bg);
+    border: 1px solid var(--neon-blue);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2),
+                inset 0 0 20px rgba(0, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.chatbot-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 50px,
+        rgba(0, 255, 255, 0.1) 50px,
+        rgba(0, 255, 255, 0.1) 51px
+    );
+    animation: scan 10s linear infinite;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+@keyframes scan {
+    from { transform: translateY(0); }
+    to { transform: translateY(-50%); }
+}
+
+/* Chat Header */
+.chat-header {
+    padding: 20px;
+    background: linear-gradient(90deg, var(--darker-bg), rgba(0, 255, 255, 0.1));
+    border-bottom: 1px solid var(--neon-blue);
+    position: relative;
+}
+
+.chat-header h2 {
+    margin: 0;
+    color: var(--neon-blue);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    text-shadow: 0 0 10px var(--neon-blue),
+                 0 0 20px var(--neon-blue);
+}
+
+/* Chat Messages Area */
+.chat-messages {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: rgba(16, 16, 24, 0.7);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Custom Scrollbar */
+.chat-messages::-webkit-scrollbar {
+    width: 5px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: var(--darker-bg);
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: var(--neon-blue);
+    border-radius: 10px;
+}
+
+/* Message Bubbles */
+.user-message, .bot-message {
+    padding: 12px 18px;
+    border-radius: 8px;
+    max-width: 75%;
+    font-size: 14px;
+    line-height: 1.4;
+    position: relative;
+    animation: messageAppear 0.3s ease-out;
+}
+
+@keyframes messageAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.user-message {
+    align-self: flex-end;
+    background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+    color: #fff;
+    box-shadow: 0 0 15px rgba(181, 55, 242, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.bot-message {
+    align-self: flex-start;
+    background: linear-gradient(135deg, var(--cyber-blue), var(--neon-blue));
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Chat Buttons Container */
+.chat-buttons {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 10px;
+    background: rgba(16, 16, 24, 0.9);
+}
+
+.chat-buttons button {
+    background: transparent;
+    color: var(--neon-blue);
+    border: 1px solid var(--neon-blue);
+    border-radius: 5px;
+    padding: 12px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.chat-buttons button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.chat-buttons button:hover {
+    background: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.chat-buttons button:hover::before {
+    left: 100%;
+}
+
+/* Chat Input Area */
+.chat-input {
+    display: flex;
+    padding: 15px;
+    gap: 10px;
+    background: var(--darker-bg);
+    border-top: 1px solid var(--neon-blue);
+}
+
+/* Input Field */
+.chat-input input {
+    flex-grow: 1;
+    border: 1px solid var(--neon-blue);
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    background: rgba(16, 16, 24, 0.9);
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.chat-input input:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+    background: rgba(16, 16, 24, 0.95);
+}
+
+.chat-input input::placeholder {
+    color: rgba(0, 255, 255, 0.5);
+}
+
+/* Send Button */
+.send-button {
+    background: transparent;
+    border: 1px solid var(--neon-blue);
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--neon-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+}
+
+.send-button:hover {
+    background: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .chatbot-container {
+        height: 100vh;
+        margin: 0;
+        border-radius: 0;
+    }
+    
+    .chat-messages {
+        padding: 15px;
+    }
+    
+    .user-message, .bot-message {
+        max-width: 85%;
+    }
+}
+
+/* Add this to your existing chatbot.css */
+.profile-button {
+    background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink)) !important;
+    color: #fff !important;
+    font-weight: 500;
+    border: none !important;
+    box-shadow: 0 0 15px rgba(181, 55, 242, 0.4);
+    transform: scale(1.02);
+}
+
+.profile-button:hover {
+    background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple)) !important;
+    box-shadow: 0 0 20px rgba(181, 55, 242, 0.6);
+    transform: scale(1.05) !important;
+}
+
+.profile-button::before {
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    ) !important;
+}
+/* Add to your existing chatbot.css */
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(90deg, var(--darker-bg), rgba(0, 255, 255, 0.1));
+    border-bottom: 1px solid var(--neon-blue);
+    position: relative;
+}
+
+.reset-button {
+    color: var(--neon-blue);
+    background: transparent;
+    border: 1px solid var(--neon-blue);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.reset-button:hover {
+    background: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    transform: rotate(180deg);
+}
+
+.reset-button svg {
+    transition: all 0.3s ease;
+}
+
+.reset-button:hover svg {
+    stroke: #fff;
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(90deg, var(--darker-bg), rgba(0, 255, 255, 0.1));
+    border-bottom: 1px solid var(--neon-blue);
+    position: relative;
+}
+
+.reset-button {
+    color: var(--neon-blue);
+    background: transparent;
+    border: 1px solid var(--neon-blue);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.reset-button:hover {
+    background: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    transform: rotate(180deg);
+}
+
+.reset-button svg {
+    transition: all 0.3s ease;
+}
+
+.reset-button:hover svg {
+    stroke: #fff;
+}
