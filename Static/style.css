@@ -1,0 +1,759 @@
+/* Cyberpunk Base Styles */
+:root {
+    --neon-pink: #ff2d55;
+    --neon-blue: #0ff;
+    --neon-purple: #b537f2;
+    --dark-bg: #0a0a0f;
+    --cyber-blue: #00ff9f;
+}
+
+body {
+    font-family: 'Rajdhani', 'Orbitron', sans-serif;
+    background-color: var(--dark-bg);
+    background-image: 
+        linear-gradient(0deg, rgba(10, 10, 15, 0.9), rgba(10, 10, 15, 0.9)),
+        url('https://source.unsplash.com/random/1920x1080');
+    background-size: cover;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+}
+
+/* Animated Fade In with Glitch Effect */
+.animated {
+    animation-duration: 1.5s;
+    position: relative;
+}
+
+.fadeIn {
+    animation: glitchFadeIn 1.5s forwards;
+}
+
+.fadeInUp {
+    animation: glitchFadeInUp 1.5s forwards;
+}
+
+@keyframes glitchFadeIn {
+    0% {
+        opacity: 0;
+        clip-path: inset(50% 0 50% 0);
+    }
+    20% {
+        clip-path: inset(20% 0 80% 0);
+    }
+    40% {
+        clip-path: inset(80% 0 20% 0);
+    }
+    60%, 100% {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+@keyframes glitchFadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+        clip-path: inset(50% 0 50% 0);
+    }
+    20% {
+        clip-path: inset(20% 0 80% 0);
+    }
+    40% {
+        clip-path: inset(80% 0 20% 0);
+    }
+    60%, 100% {
+        opacity: 1;
+        transform: translateY(0);
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+/* Events Layout */
+.events-container {
+    max-width: 1200px;
+    margin: 80px auto;
+    padding: 20px;
+    position: relative;
+}
+
+.events-container h2 {
+    color: var(--neon-blue);
+    text-align: center;
+    font-size: 2.5em;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px var(--neon-blue),
+                 0 0 20px var(--neon-blue),
+                 0 0 30px var(--neon-blue);
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
+
+/* Event Cards */
+.event-card {
+    background: rgba(16, 16, 24, 0.8);
+    border: 1px solid var(--neon-blue);
+    border-radius: 8px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+}
+
+.event-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: 0.5s;
+}
+
+.event-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+}
+
+.event-card:hover::before {
+    transform: translateX(100%);
+}
+
+.event-card h3 {
+    color: var(--cyber-blue);
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.event-card p {
+    color: #fff;
+    margin: 10px 0;
+    font-size: 1.1em;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* Icons and Links */
+.profile-icon, .chatbot-icon {
+    position: fixed;
+    background: rgba(16, 16, 24, 0.9);
+    padding: 15px;
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--neon-purple);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.profile-icon {
+    top: 20px;
+    right: 20px;
+    border: 2px solid var(--neon-pink);
+}
+
+.chatbot-icon {
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    border: 2px solid var(--neon-blue);
+}
+
+.profile-icon:hover, .chatbot-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px var(--neon-purple);
+}
+
+.profile-icon img, .chatbot-icon img {
+    width: 24px;
+    height: 24px;
+    filter: invert(1);
+}
+
+.chat-icon-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid var(--neon-blue);
+    border-radius: 5px;
+    color: var(--neon-blue);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.chat-icon-link:hover {
+    background: rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 15px var(--neon-blue);
+}
+
+.ai-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    filter: invert(1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .events-grid {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+    
+    .events-container h2 {
+        font-size: 2em;
+    }
+    
+    .event-card {
+        margin: 10px;
+    }
+}
+/* Original cyberpunk styles remain the same - existing styles up to line 557 */
+/* ... previous styles ... */
+
+/* Login and Register Containers */
+.login-container, .register-container {
+    background: rgba(16, 16, 24, 0.8);
+    border: 1px solid var(--neon-blue);
+    border-radius: 8px;
+    padding: 30px;
+    max-width: 400px;
+    margin: 100px auto;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2),
+                inset 0 0 20px rgba(0, 255, 255, 0.1);
+    animation: containerGlow 2s infinite alternate;
+}
+
+.login-container::before, .register-container::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        var(--neon-blue), 
+        var(--neon-purple),
+        var(--neon-pink),
+        var(--cyber-blue));
+    border-radius: 8px;
+    z-index: -1;
+    animation: borderGlow 3s linear infinite;
+}
+
+@keyframes containerGlow {
+    from {
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.2),
+                    inset 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+    to {
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.3),
+                    inset 0 0 30px rgba(0, 255, 255, 0.2);
+    }
+}
+
+@keyframes borderGlow {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+/* Login/Register Headers */
+.login-container h2, .register-container h2 {
+    color: var(--neon-blue);
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px var(--neon-blue),
+                 0 0 20px var(--neon-blue);
+}
+
+/* Form Inputs */
+.login-container input, .register-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    background: rgba(16, 16, 24, 0.6);
+    border: 1px solid var(--neon-blue);
+    border-radius: 5px;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.login-container input:focus, .register-container input:focus {
+    outline: none;
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 15px rgba(255, 45, 85, 0.3);
+    background: rgba(16, 16, 24, 0.8);
+}
+
+.login-container input::placeholder, .register-container input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Submit Buttons */
+.login-container button, .register-container button {
+    width: 100%;
+    padding: 12px;
+    margin: 20px 0;
+    background: transparent;
+    border: 1px solid var(--neon-blue);
+    border-radius: 5px;
+    color: var(--neon-blue);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-container button::before, .register-container button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.login-container button:hover, .register-container button:hover {
+    background: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.login-container button:hover::before, .register-container button:hover::before {
+    left: 100%;
+}
+
+/* Links */
+.login-container p, .register-container p {
+    text-align: center;
+    color: #fff;
+    margin-top: 20px;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.login-container a, .register-container a {
+    color: var(--neon-pink);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.login-container a::after, .register-container a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--neon-pink);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.login-container a:hover, .register-container a:hover {
+    text-shadow: 0 0 10px var(--neon-pink);
+}
+
+.login-container a:hover::after, .register-container a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .login-container, .register-container {
+        margin: 50px 20px;
+        padding: 20px;
+    }
+    
+    .login-container h2, .register-container h2 {
+        font-size: 1.8em;
+    }
+}
+/* Profile Container Styles */
+.profile-container {
+    background: rgba(16, 16, 24, 0.8);
+    border: 1px solid var(--neon-blue);
+    border-radius: 8px;
+    padding: 30px;
+    max-width: 500px;
+    margin: 100px auto;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2),
+                inset 0 0 20px rgba(0, 255, 255, 0.1);
+    animation: containerGlow 2s infinite alternate;
+}
+
+.profile-container::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        var(--neon-blue), 
+        var(--neon-purple),
+        var(--neon-pink),
+        var(--cyber-blue));
+    border-radius: 8px;
+    z-index: -1;
+    animation: borderGlow 3s linear infinite;
+}
+
+/* Profile Header */
+.profile-container h2 {
+    color: var(--neon-blue);
+    text-align: center;
+    font-size: 2.5em;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px var(--neon-blue),
+                 0 0 20px var(--neon-blue);
+}
+
+/* Profile Information */
+.profile-container p {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(16, 16, 24, 0.6);
+    border: 1px solid var(--neon-purple);
+    border-radius: 5px;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-container p::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(181, 55, 242, 0.1),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.profile-container p:hover::before {
+    left: 100%;
+}
+
+.profile-container strong {
+    color: var(--cyber-blue);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px var(--cyber-blue);
+}
+
+/* Back Link */
+.back-link {
+    display: inline-block;
+    width: 100%;
+    padding: 12px;
+    margin: 20px 0 0 0;
+    background: transparent;
+    border: 1px solid var(--neon-blue);
+    border-radius: 5px;
+    color: var(--neon-blue);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.back-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.back-link:hover {
+    background: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.back-link:hover::before {
+    left: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .profile-container {
+        margin: 50px 20px;
+        padding: 20px;
+    }
+    
+    .profile-container h2 {
+        font-size: 2em;
+    }
+    
+    .profile-container p {
+        padding: 12px;
+        font-size: 1em;
+    }
+}
+
+/* Profile specific styles */
+.profile-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.user-avatar {
+    background: rgba(0, 255, 255, 0.1);
+    border: 2px solid var(--neon-blue);
+    border-radius: 50%;
+    padding: 1rem;
+}
+
+.user-avatar svg {
+    stroke: var(--neon-blue);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: rgba(16, 16, 24, 0.6);
+    border: 1px solid var(--neon-blue);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 2rem;
+    color: var(--neon-blue);
+    font-family: 'Orbitron', sans-serif;
+    text-shadow: 0 0 10px var(--neon-blue);
+}
+
+.stat-label {
+    color: #fff;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.tickets-section {
+    margin-top: 2rem;
+}
+
+.tickets-section h3 {
+    color: var(--neon-blue);
+    margin-bottom: 1rem;
+}
+
+.ticket-item {
+    background: rgba(16, 16, 24, 0.8);
+    border: 1px solid var(--neon-blue);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.ticket-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.ticket-content {
+    padding: 1rem;
+}
+
+.ticket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.ticket-header h4 {
+    color: var(--neon-blue);
+    margin: 0;
+}
+
+.ticket-number {
+    color: var(--neon-pink);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+}
+
+.ticket-details {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.detail-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.detail-row svg {
+    stroke: var(--neon-blue);
+}
+
+.ticket-actions {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.download-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid var(--neon-blue);
+    color: var(--neon-blue);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+}
+
+.download-button:hover {
+    background: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.no-tickets {
+    text-align: center;
+    padding: 3rem;
+    background: rgba(16, 16, 24, 0.6);
+    border-radius: 8px;
+}
+
+.no-tickets svg {
+    stroke: var(--neon-blue);
+    margin-bottom: 1rem;
+}
+
+.browse-events-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid var(--neon-blue);
+    color: var(--neon-blue);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.browse-events-btn:hover {
+    background: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .ticket-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
